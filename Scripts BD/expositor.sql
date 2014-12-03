@@ -4,10 +4,10 @@
 
 -- Dumped from database version 9.2.9
 -- Dumped by pg_dump version 9.2.9
--- Started on 2014-11-29 10:47:24
+-- Started on 2014-12-03 03:02:40
 
 SET statement_timeout = 0;
-SET client_encoding = 'UTF8';
+SET client_encoding = 'SQL_ASCII';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
@@ -26,11 +26,12 @@ SET default_with_oids = false;
 CREATE TABLE "Expositor" (
     ci integer NOT NULL,
     "Nombre" text NOT NULL,
-    "Correo" text NOT NULL
+    "Correo" text NOT NULL,
+    "Apellidos" text NOT NULL
 );
 
 
-ALTER TABLE public."Expositor" OWNER TO sis2;
+ALTER TABLE public."Expositor" OWNER TO postgres;
 
 --
 -- TOC entry 1920 (class 0 OID 16394)
@@ -38,20 +39,20 @@ ALTER TABLE public."Expositor" OWNER TO sis2;
 -- Data for Name: Expositor; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY "Expositor" (ci, "Nombre", "Correo") FROM stdin;
+COPY "Expositor" (ci, "Nombre", "Correo", "Apellidos") FROM stdin;
 \.
 
 
 --
 -- TOC entry 1813 (class 2606 OID 16401)
--- Name: ci; Type: CONSTRAINT; Schema: public; Owner: sis2; Tablespace: 
+-- Name: ci; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY "Expositor"
     ADD CONSTRAINT ci PRIMARY KEY (ci);
 
 
--- Completed on 2014-11-29 10:47:24
+-- Completed on 2014-12-03 03:02:40
 
 --
 -- PostgreSQL database dump complete

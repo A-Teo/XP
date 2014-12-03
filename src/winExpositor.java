@@ -12,7 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+import database.SqlScript;
 
 public class winExpositor {
 
@@ -93,13 +93,13 @@ public class winExpositor {
 		JButton btnGuardar = new JButton("Guardar");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				/**String ci=this.textCi.getText();
-				String nom=this.textNombre.getText();
-				String apell=this.textApellidos.getText();
-				String corr=this.textCorreo.getText();
+				String ci=textCi.getText();
+				String nom=textNombre.getText();
+				String apell=textApellidos.getText();
+				String corr=textCorreo.getText();
 				String sql = "INSERT INTO Expositor VALUES(" + ci + ", "
 		               + nom + ", " + apell + ", " + corr +"');";
-		        PostgresConn.updateDB(sql); **/
+		        PostgresConn.updateDB(sql); 
 			}
 		});
 		btnGuardar.addMouseListener(new MouseAdapter() {
