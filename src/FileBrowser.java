@@ -1,4 +1,5 @@
 import java.io.File;
+import java.sql.Date;
 import java.util.Scanner;
 
 
@@ -11,12 +12,12 @@ public class FileBrowser {
 		if (f.exists()){ 
 			File[] fs = f.listFiles();
 			for (File fa: fs){
-				System.out.println(fa.getName());
+				Date d = new Date(fa.lastModified());
+				System.out.println(fa.getName()+"\t"+fa.length()+"\t"+d.toString());
 			}
 		} else { 
 			System.out.println("Error en la ruta");
 		}
 		
-	}
-	
+	}	
 }
