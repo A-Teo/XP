@@ -10,8 +10,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
@@ -38,13 +36,13 @@ public class Download extends JPanel {
     private JScrollPane scrollPane;
     private String currentPath;
     private JButton downloadButton;
+    private DefaultTableModel defaultTable;
 
     public Download() {
 //        super(new BoxLayout(this, 50));
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         GridBagConstraints c = new GridBagConstraints();
 
-        GetFiles();
         CreateTable();
 
         downloadButton = new JButton("Download File");
@@ -52,7 +50,7 @@ public class Download extends JPanel {
         downloadButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                DownloadFile();
+                DownloadFile(false);
             }
         });
         scrollPane = new JScrollPane(table);
@@ -75,25 +73,23 @@ public class Download extends JPanel {
             File[] fs = f.listFiles();
             for (File fa : fs) {
                 Date d = new Date(fa.lastModified());
-                System.out.println(fa.getName() + "\t" + fa.length() + "\t" + d.toString());
                 filesList.add(new FileProfile(fa.getName(), fa.length(), d, fa.getPath()));
             }
         } else {
             System.out.println("Error en la ruta");
             filesList = null;
         }
+
+        System.out.println("filesList:      " + filesList.size());
     }
 
     private void CreateTable() {
-        DefaultTableModel defaultTable = new DefaultTableModel();
 
-        defaultTable.addColumn("File Name");
-        defaultTable.addColumn("Size");
-        defaultTable.addColumn("Date");
 
-        table = new JTable(defaultTable);
 
-        FillTable();
+//        table = new JTable(defaultTable);
+
+        UpdateTable();
 
         table.addMouseListener(new MouseAdapter() {
             @Override
@@ -101,12 +97,19 @@ public class Download extends JPanel {
                 int rowIndex = table.getSelectedRow();
                 currentPath = filesList.get(rowIndex).path;
                 downloadButton.setEnabled(true);
-                System.out.println(currentPath);
             }
         });
     }
 
-    private void FillTable() {
+    public void UpdateTable() {
+        defaultTable = new DefaultTableModel();
+        defaultTable.addColumn("File Name");
+        defaultTable.addColumn("Size");
+        defaultTable.addColumn("Date");
+        table = new JTable(defaultTable);
+        GetFiles();
+
+
         for (int i = 0; i < filesList.size(); i++) {
             FileProfile p = filesList.get(i);
             Object[] data = {p.name, p.size, p.date};
@@ -121,39 +124,48 @@ public class Download extends JPanel {
         return currentPath;
     }
 
-    private void DownloadFile() {
+    public void setCurrentPath(String newPath) {
+        this.currentPath = newPath;
+    }
+
+    public boolean DownloadFile(boolean test) {
         try {
             File file = new File(currentPath);
-            if (file.exists()) {
+            if (file.exists() || test) {
 
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setSelectedFile(new File(file.getName()));
+                String PATH;
 
-                
-                
-//                int seleccion = fileChooser.showSaveDialog(null);
-                fileChooser.showSaveDialog(null);
+                if (!test) {
+                    fileChooser.showSaveDialog(null);
 
-                File JFC = fileChooser.getSelectedFile();
-                String PATH = JFC.getAbsolutePath();
+                    File JFC = fileChooser.getSelectedFile();
+                    PATH = JFC.getAbsolutePath();
 
+                } else {
+                    PATH = "test/resources/upload/newFile_jdk7.txt";
+                }
 
                 Files.copy(file.toPath(),
                         (new File(PATH)).toPath(),
                         StandardCopyOption.REPLACE_EXISTING);
                 JOptionPane.showMessageDialog(null,
-                        "El archivo se a guardado Exitosamente",
+                        "El archivo se a descargado Exitosamente",
                         "Informacion", JOptionPane.INFORMATION_MESSAGE);
                 currentPath = null;
+                return true;
             } else {
                 JOptionPane.showMessageDialog(null,
-                        "Su archivo no se ha guardado",
+                        "Su archivo no se ha descargado",
                         "Advertencia", JOptionPane.WARNING_MESSAGE);
+                return false;
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null,
-                    "Su archivo no se ha guardado",
+                    "Su archivo no se ha descargado",
                     "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return false;
         }
     }
 

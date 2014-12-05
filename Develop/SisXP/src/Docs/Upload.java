@@ -17,12 +17,14 @@ import javax.swing.JOptionPane;
 public class Upload extends javax.swing.JPanel {
 
     private File file;
+    private Download dowload;
 
 //    private final JScrollPane scrollPaneArea;
     /**
      * Creates new form Upload
      */
-    public Upload() {
+    public Upload(Download newContentPane) {
+        this.dowload = newContentPane;
         initComponents();
         UploadButton.setEnabled(false);
     }
@@ -130,7 +132,7 @@ public class Upload extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
-    private void guardarArchivo() {
+    public boolean guardarArchivo() {
         try {
             if (file.exists()) {
                 String path = "C:/destination/";
@@ -153,15 +155,27 @@ public class Upload extends javax.swing.JPanel {
                         "El archivo se a guardado Exitosamente",
                         "Informacion", JOptionPane.INFORMATION_MESSAGE);
                 PathFile.setText(null);
+                dowload.UpdateTable();
+                return true;
             } else {
                 JOptionPane.showMessageDialog(null,
                         "Su archivo no se ha guardado",
                         "Advertencia", JOptionPane.WARNING_MESSAGE);
+                return false;
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null,
                     "Su archivo no se ha guardado",
                     "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return false;
         }
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
     }
 }

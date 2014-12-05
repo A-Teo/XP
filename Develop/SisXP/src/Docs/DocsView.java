@@ -16,32 +16,31 @@ import javax.swing.JTabbedPane;
  */
 public class DocsView extends JFrame {
     
+    private Download downloadPanel;
+    private JPanel uploadPanel;
+    
     public DocsView() {
         setTitle("Tabbed Pane");
         JTabbedPane jtp = new JTabbedPane();
         getContentPane().add(jtp);
-//        JPanel jp1 = new JPanel();
-        JPanel jp2 = new Upload();
         
         
-        
-        Download newContentPane = new Download();
-        newContentPane.setOpaque(true); //content panes must be opaque
-//        frame.setContentPane(newContentPane);
-        
-        
-//        JLabel label1 = new JLabel();
-//        label1.setText("You are in area of Tab1");
-        JLabel label2 = new JLabel();
-        label2.setText("Tab2");
-        jp2.add(label2);
-        jtp.addTab("Download View", newContentPane);
-        jtp.addTab("Upload View", jp2);
+        downloadPanel = new Download();
+        uploadPanel = new Upload(downloadPanel);
+       
+        jtp.addTab("Download View", downloadPanel);
+        jtp.addTab("Upload View", uploadPanel);
         
         
         this.setSize(600, 500);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-    
-    
+
+    public Download getDownloadPanel() {
+        return downloadPanel;
+    }
+
+    public JPanel getUploadPanel() {
+        return uploadPanel;
+    }
 }
