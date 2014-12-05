@@ -4,6 +4,7 @@
  */
 package sisxp;
 
+import Docs.DocsView;
 import javax.swing.JFrame;
 import vistas.PlanillaDeGastos;
 import controladores.*;
@@ -143,7 +144,7 @@ public class MainPage extends JFrame {
 
     private void DocsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DocsButtonActionPerformed
         // TODO add your handling code here:
-        Docs view = new Docs();
+        DocsView view = new DocsView();
         this.dispose();
         view.setVisible(true);
     }//GEN-LAST:event_DocsButtonActionPerformed

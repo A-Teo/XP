@@ -68,7 +68,11 @@ public class ControladorConsultas
             ResultSet resultado = PostgresConn.consultar("INSERT INTO gasto (tipogasto_idtipogasto, responsable_idresponsable, item, moneda, fecha, detalle, monto) VALUES(" + idTipo + ", " + idResponsable + ", '" + gasto + "', 'BOB', '" + fecha + "', '" + detalle + "', " + monto + ")");
         }
         
-        public ArrayList<String[]> obtenerGastos()
+        /**
+     *
+     * @return
+     */
+    public ArrayList<String[]> obtenerGastos()
         {
             ArrayList<String[]> res = new ArrayList<String[]>();
             try
