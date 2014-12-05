@@ -9,8 +9,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Test;
 
 /**
  *
@@ -42,9 +42,6 @@ public class DocsViewTest {
         
         int randomNum =  + (int)(Math.random()*100); 
         Path newFilePath = Paths.get("C:/destination/newFile_jdk7.txt");
-//        Files.createFile(newFilePath);
-        
-//        File file = new File(newFilePath.toUri());
         
         Download download = docs.getDownloadPanel();
         download.setCurrentPath(newFilePath.toString());
