@@ -12,6 +12,8 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -65,6 +67,7 @@ public class Download extends JPanel {
 
     private void GetFiles() {
         filesList = new ArrayList<>();
+        FolderValidation();
         Scanner sc = new Scanner("C:/destination/");
         String ruta = sc.nextLine();
         File f = new File(ruta);
@@ -120,32 +123,49 @@ public class Download extends JPanel {
 
     private void DownloadFile() {
         try {
-            String nombre = "hhhhh";
-            JFileChooser file = new JFileChooser();
-            file.showSaveDialog(this);
-            File guarda = file.getSelectedFile();
+            File file = new File(currentPath);
+            if (file.exists()) {
 
-            if (guarda != null) {
-                nombre = file.getSelectedFile().getName();
-                /*guardamos el archivo y le damos el formato directamente,
-                 * si queremos que se guarde en formato doc lo definimos como .doc*/
-                FileWriter save = new FileWriter(guarda + "Copia.txt", true);
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setSelectedFile(new File(file.getName()));
 
-//                save.write(areaDeTexto.getText());
-//                save.write(System.lineSeparator());
-//
-//                save.close();
-//                JOptionPane.showMessageDialog(null,
-//                        "El archivo se a guardado Exitosamente",
-//                        "Informaci�n", JOptionPane.INFORMATION_MESSAGE);
+                
+                
+//                int seleccion = fileChooser.showSaveDialog(null);
+                fileChooser.showSaveDialog(null);
+
+                File JFC = fileChooser.getSelectedFile();
+                String PATH = JFC.getAbsolutePath();
+
+
+                Files.copy(file.toPath(),
+                        (new File(PATH)).toPath(),
+                        StandardCopyOption.REPLACE_EXISTING);
+                JOptionPane.showMessageDialog(null,
+                        "El archivo se a guardado Exitosamente",
+                        "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                currentPath = null;
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "Su archivo no se ha guardado",
+                        "Advertencia", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,
+                    "Su archivo no se ha guardado",
+                    "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    private void FolderValidation() {
+        File file = new File("C:/destination/");
+        if (!file.exists()) {
+            if (file.mkdir()) {
+                System.out.println("Directory is created!");
+            } else {
+                System.out.println("Failed to create directory!");
             }
         }
-        catch(IOException ex)
-		   {
-			 JOptionPane.showMessageDialog(null,
-					 "Su archivo no se ha guardado",
-					 "Advertencia",JOptionPane.WARNING_MESSAGE);
-		   }
     }
 
     public class FileProfile {

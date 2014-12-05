@@ -15,10 +15,10 @@ import javax.swing.JOptionPane;
  * @author WVasquez
  */
 public class Upload extends javax.swing.JPanel {
-    private File file;
-    
-//    private final JScrollPane scrollPaneArea;
 
+    private File file;
+
+//    private final JScrollPane scrollPaneArea;
     /**
      * Creates new form Upload
      */
@@ -109,11 +109,10 @@ public class Upload extends javax.swing.JPanel {
         JFileChooser file = new JFileChooser();
         file.showOpenDialog(this);
         this.file = file.getSelectedFile();
-        if(this.file != null) {
+        if (this.file != null) {
             PathFile.setText(this.file.getPath());
             UploadButton.setEnabled(true);
-        }
-        else {
+        } else {
             UploadButton.setEnabled(false);
         }
     }//GEN-LAST:event_SelectButtonActionPerformed
@@ -123,7 +122,6 @@ public class Upload extends javax.swing.JPanel {
         PathFile.setText(null);
         UploadButton.setEnabled(false);
     }//GEN-LAST:event_CancelButtonActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancelButton;
     private javax.swing.JTextArea PathFile;
@@ -134,26 +132,36 @@ public class Upload extends javax.swing.JPanel {
 
     private void guardarArchivo() {
         try {
-            if(file.exists()) 
-            {
+            if (file.exists()) {
                 String path = "C:/destination/";
+
+
+                File folder = new File(path);
+                if (!folder.exists()) {
+                    if (folder.mkdir()) {
+                        System.out.println("Directory is created!");
+                    } else {
+                        System.out.println("Failed to create directory!");
+                    }
+                }
+
                 System.out.println(file.getName());
                 Files.copy(file.toPath(),
-                    (new File(path + file.getName())).toPath(),
-                    StandardCopyOption.REPLACE_EXISTING);
+                        (new File(path + file.getName())).toPath(),
+                        StandardCopyOption.REPLACE_EXISTING);
                 JOptionPane.showMessageDialog(null,
                         "El archivo se a guardado Exitosamente",
-                        "Informacion",JOptionPane.INFORMATION_MESSAGE);
+                        "Informacion", JOptionPane.INFORMATION_MESSAGE);
                 PathFile.setText(null);
             } else {
                 JOptionPane.showMessageDialog(null,
                         "Su archivo no se ha guardado",
-                        "Advertencia",JOptionPane.WARNING_MESSAGE);
+                        "Advertencia", JOptionPane.WARNING_MESSAGE);
             }
-        } catch(Exception ex){
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null,
                     "Su archivo no se ha guardado",
-                    "Advertencia",JOptionPane.WARNING_MESSAGE);
+                    "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
     }
 }
