@@ -47,7 +47,7 @@ public class Reserva {
     	              "FECHA:" + fecha + "\n" +
     	              "CIUDAD:" + ciudad + "\n" +
     	              "DIRECCIÓN:" + direcc + "\n"
-                    + "Costo: " + new modelo.funcioncambio().valor(costo, "BRL", "BOB") + " Reales";    	    	    
+                    + "Costo: " + new modelo.funcioncambio().valor(costo, "BOB", "BRL") + " Reales";    	    	    
     	return data;
     }
 
