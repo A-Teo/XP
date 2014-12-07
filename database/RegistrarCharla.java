@@ -96,11 +96,11 @@ public class RegistrarCharla extends JFrame {
 		contentPane.add(lblAula);
 		
 		JLabel lblExpositor = new JLabel("Expositor");
-		lblExpositor.setBounds(52, 174, 46, 14);
+		lblExpositor.setBounds(52, 174, 78, 14);
 		contentPane.add(lblExpositor);
 		
 		JLabel lblColaborador = new JLabel("Colaborador");
-		lblColaborador.setBounds(52, 199, 68, 14);
+		lblColaborador.setBounds(52, 199, 94, 14);
 		contentPane.add(lblColaborador);
 		
 		JLabel lblTema = new JLabel("Tema");
@@ -112,38 +112,38 @@ public class RegistrarCharla extends JFrame {
 		contentPane.add(lblHorario);
 		
 		idTxt = new JTextField();
-		idTxt.setBounds(158, 96, 86, 20);
+		idTxt.setBounds(242, 99, 86, 20);
 		contentPane.add(idTxt);
 		idTxt.setColumns(10);
 		
 		fechaTxt = new JTextField();
 		fechaTxt.setColumns(10);
-		fechaTxt.setBounds(158, 121, 86, 20);
+		fechaTxt.setBounds(242, 124, 86, 20);
 		contentPane.add(fechaTxt);
 		
 		aulaTxt = new JTextField();
 		aulaTxt.setColumns(10);
-		aulaTxt.setBounds(158, 146, 86, 20);
+		aulaTxt.setBounds(242, 149, 86, 20);
 		contentPane.add(aulaTxt);
 		
 		expositorTxt = new JTextField();
 		expositorTxt.setColumns(10);
-		expositorTxt.setBounds(158, 171, 86, 20);
+		expositorTxt.setBounds(242, 174, 86, 20);
 		contentPane.add(expositorTxt);
 		
 		colaboradorTxt = new JTextField();
 		colaboradorTxt.setColumns(10);
-		colaboradorTxt.setBounds(158, 196, 86, 20);
+		colaboradorTxt.setBounds(242, 199, 86, 20);
 		contentPane.add(colaboradorTxt);
 		
 		temaTxt = new JTextField();
 		temaTxt.setColumns(10);
-		temaTxt.setBounds(158, 221, 86, 20);
+		temaTxt.setBounds(242, 224, 86, 20);
 		contentPane.add(temaTxt);
 		
 		horarioTxt = new JTextField();
 		horarioTxt.setColumns(10);
-		horarioTxt.setBounds(158, 246, 86, 20);
+		horarioTxt.setBounds(242, 249, 86, 20);
 		contentPane.add(horarioTxt);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -204,9 +204,6 @@ public class RegistrarCharla extends JFrame {
 		});
 		btnNewButton_1.setBounds(512, 345, 217, 52);
 		contentPane.add(btnNewButton_1);
-		
-		
-
 		
 	}
 }
