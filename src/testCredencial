@@ -1,0 +1,49 @@
+public class Credencial {
+
+	/**
+	 * @return
+	 */
+	public boolean logueado() {
+		boolean res = true;
+		
+		return res;
+	}
+	/**
+	 * @return
+	 */
+	public boolean pagado() {
+		
+		return true;
+	}
+	/**
+	 * @return
+	 */
+	public boolean inscrito() {
+		
+		return true;
+	}
+
+}
+
+
+y la clase de pruebas es:
+
+public class Crdencial{
+
+	
+	public void test_logueado(){
+	Credencial creden = new Credencial();
+	Assert.assertEquals(true,creden.logueado());
+	
+	} 
+	public void test_pagado(){
+	Credencial creden = new Credencial();
+	Assert.assertEquals(true,creden.pagado());
+	
+	}
+	public void test_inscrito(){
+		Credencial creden = new Credencial();
+		Assert.assertEquals(true,creden.inscrito());
+		
+		}
+}
